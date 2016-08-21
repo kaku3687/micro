@@ -1,0 +1,39 @@
+PhotoresistiveSensor_Description
+
+== Description ==
+The Microduino Light Sensor uses a photosensitive resistor to detect the amount of ambient light present. The sensor is effectively a resistor that changes in value as the light intensity surrounding it changes. The sensor will output a voltage value that corresponds to the amount of light detected by the sensor.
+
+Couple the sensor to an LED and you have a smart light that illuminates a room as it gets dark!
+
+== Specifications ==
+=== Dimensions ===
+**Board: 20mm x 10mm
+**Connector: 4-Pin interface, 1.27mm-pitch
+
+=== Electrical ===
+**Analog Output Device
+**Analog Output: 0-1023 (with Microduino Core modules) 
+
+=== Operational ===
+**Bright Resistance(up to 100Lux): 8-20kO
+**Dark Resistance: 1MO
+
+**Sensitivity:
+***Given light intensity of 10Lux and 100Lux, with corresponding resistances (R10 and R100), the sensitivity factor is 0.8. This gives you a sense of how resistance changes with a given quantitative change in the amount of light present.
+
+**Pins: Signal, VCC (power), GND (ground) and NC (not connected)
+**'''''NOTE''''': Sensor must be connected to analog capable ports (i.e. A0-A7)
+[[File:sensor-light.jpg|center|400px]]
+
+=== Spec Sheets ===
+
+== Programming ==
+=== Libraries ===
+=== Useful Functions ===
+
+== FAQ ==
+
+== Projects ==
+
+=== Got a Suggestion for an Edit? ===
+Email us at '''support@microduino.cc'''

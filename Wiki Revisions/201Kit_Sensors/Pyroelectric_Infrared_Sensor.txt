@@ -1,0 +1,91 @@
+{| style="width: 800px;"
+|-
+|
+==Outline==
+Infrared pyroelectric sensor can detect the movement of the human or animal body issued by the infrared and output switch signal, which can be applied to projects that need to detect the movement of human body.
+<br />
+Traditional pyroelectric infrared sensors need to be used to realize the thermal release infrared probe, the special chip and the complex peripheral circuit. Its size is slightly larger, the circuit is complex and the reliability is lower. The infrared pyroelectric sensor adopts the digital integration of human pyroelectric infrared probe with small size, high reliability, low power consumption, simple peripheral circuit and so on.
+===Infrared Probe Overview===
+The sensor uses the digital integration with the human pyroelectric infrared detector AM412 integrated.
+<br />
+Am412 is a pyroelectric infrared probe with intelligent digital control circuit and body sensitive detection integrated in an electromagnetic shield.
+The movement of the human body signal can be induced by the human body detection sensitive element and be coupled into a digital intelligent integrated circuit chip through a very high impedance differential input circuit. There will be a delayed high level output when the PIR signal exceeds a selected digital threshold. All the signal processing is done on one chip.
+<br />
+==Specification==
+*Electrical specification 
+**Input Voltage: 3.3~5V (MAX6V)
+**Currency: 15uA
+**Temperature: 20~85℃
+**Output Voltage: High level 5V/ Low level 0V
+*Tech Parameters
+**Output Delay Time(high level): Around 2.3s -3s
+**Sensing Angle: 100°
+**Sensing Distance: 7m
+*Size 
+**Board Size:20mm*10mm
+**1.27mm-pitch 4PIN interface; 
+*Connection Method 
+**Pin Description: GND, VCC, signal and NC.
+
+==Development==
+===Equipment===
+{|class="wikitable"
+|-
+|Module||Number||Function
+|-
+|[[mCookie-CoreUSB]]||1||Core board 
+|-
+|[[mCookie-Hub]]||1||Sensor pin board 
+|-
+|[[Microduino-PIR]]||1|| Pyroelectric Infrared sensor 
+|}
+
+*Other Hardware Equipment 
+**One USB cable 
+[[File:Tem-Hum.jpg|600px|center]]
+
+===Preparation===
+*Setup 1：Connect the PIR and the Hub D6.
+[[file:mCookie-PIR-sensor.JPG|600px|center]]
+*Setup 2：Stack the CoreUSB, Hub and PIR together and connect them to the computer with a USB cable. 
+[[file:mCookie-Sound-pc.JPG|600px|center]]
+
+===Experiment: Detect Human Movement===
+*Open Arduino IDE and copy the following code into IDE. 
+<source lang="cpp">
+#define  sensorPin  6
+
+int state;
+
+void setup()
+{
+  pinMode(sensorPin, INPUT);
+  Serial.begin(9600);
+}
+void loop()
+{
+  state = digitalRead(sensorPin);
+  if (state == 1)
+    Serial.println("Somebody is in this area!");
+  else
+    Serial.println("No one!");
+  delay(500);
+}
+</source>
+* Select the right port from （Tools）→（Serial Port） in Arduino ID after compiling and then download program. 
+
+[[file:upload.JPG|500px|center]]
+* Open the serial monitor after download. The displayed note reflects current detection status. 
+[[file:mCookie-pir-res.JPG|500px|center]]
+*Result 
+When the infrared pyroelectric sensor detects the movement of the living body in the detection range, the output pin will output high level voltage, which is 5V. when the infrared pyroelectric signal is detected to be gone for 2.3-3s, it will output low level voltage, which is 0V. So we can quickly build a moving human detection project based on this characteristic.
+===Program Debugging===
+*“#define  sensorPin  6”: Define sensor interface
+*Use“digitalRead(sensorPin);”to read sensor change and therefore, to judge if there is human movement.  
+
+==Application==
+*Intrusion alarm  
+*Non-contact infrared automatic switch
+==Video==
+
+|}

@@ -1,0 +1,82 @@
+PIRSensor_Tutorial
+
+== Description ==
+This tutorial will walk you through the use of a Microduino Pyroelectric Infrared Sensor. By the end of this tutorial, you will be able to connect the sensor to any Microduino capable system and program your build to use data from the sensor in your project.
+
+Use the PIR sensor to see if someone is moving in an area, like a security system.
+
+== Materials ==
+{|class="wikitable"
+|-
+|Module||Number||Function
+|-
+|[[mCookie-CoreUSB]]||1||Core board 
+|-
+|[[mCookie-Hub]]||1||Sensor pin board 
+|-
+|[[Microduino-PIR]]||1|| Pyroelectric Infrared sensor 
+|}
+
+*Other Hardware Equipment 
+**One USB cable 
+[[File:Tem-Hum.jpg|600px|center]]
+
+== Instructions ==
+*Setup 1：Connect the PIR and the Hub D6.
+[[file:mCookie-PIR-sensor.JPG|600px|center]]
+*Setup 2：Stack the CoreUSB and Hub, with the connected PIR, together and connect them to the computer with a USB cable. 
+[[file:mCookie-Sound-pc.JPG|600px|center]]
+
+== Code ==
+The following code example will check the status of the PIR sensor and print that status out to your screen. 
+Once you have uploaded the software to your Core Module, open up the Serial Monitor and you will see the output from your sensor.
+
+*Open Arduino IDE and copy the following code into IDE. 
+<source lang="cpp">
+#define  sensorPin  6
+
+int state;
+
+void setup()
+{
+  pinMode(sensorPin, INPUT);
+  Serial.begin(9600);
+}
+void loop()
+{
+  state = digitalRead(sensorPin);
+  if (state == 1)
+    Serial.println("Somebody is in this area!");
+  else
+    Serial.println("No one!");
+  delay(500);
+}
+</source>
+* Select the right port from （Tools）→（Serial Port） in Arduino ID after compiling and then download program. 
+[[file:upload.JPG|500px|center]]
+
+* Open the serial monitor after download. The displayed note reflects current detection status. 
+[[file:mCookie-pir-res.JPG|500px|center]]
+
+== Explanation of Functions ==
+*Functions
+**pinMode( , );
+The pinMode function is used with any generic digital sensor. This tells the program whether a particular pin, which you designate, is either used as Input or Output. In this program:
+'''pinMode(sensorPin, INPUT);'''
+
+This function sets the sensor connected to the sensorPin (which is pin 6 in this program) as an INPUT device. So, the Core module will take in input from the sensor. You can also set this to OUTPUT for devices that produce some sort of output, like an LED.
+
+**digitalRead();
+The digitalRead function takes the input from a digital sensor. The function will check if the digital sensor has a state of being either HIGH or LOW and return that value. Remember, a digital signal can only be either HIGH or LOW, where, electronically, HIGH corresponds to 5V and LOW corresponds to 0V.
+
+In this software example, the returned from using the digitalRead function is stored in a variable we've named 'state':
+'''state = digitalRead(sensorPin);'''
+
+== FAQ ==
+
+== Additional Info ==
+
+== Videos ==
+
+=== Got a Suggestion for an Edit? ===
+Email us at '''support@microduino.cc'''

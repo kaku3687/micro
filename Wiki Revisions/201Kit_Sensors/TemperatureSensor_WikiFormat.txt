@@ -1,0 +1,37 @@
+TemperatureSensor_Description
+
+== Description ==
+This mCookie sensor uses an AM2321 chip and the standard mCookie connector to give you the ability to quickly add high precision temperature measuring and humidity sensing to any Microduino project. The sensor has an on-board microprocessor delivering rapid response, high noise tolerance and excellent data quality.
+
+== Specifications ==
+
+=== Dimensions ===
+**Dimensions of the Sensor: 8mm*11mm
+**Dimensions of the Board: 20mm*10mm
+** Connector Interface: 4 Pin, 1.27mm-pitch
+
+=== Electrical ===
+*Electrical Specifications
+**Operation Voltage: 2.6~5V；
+**Output: Data over I2C bus protocol
+
+=== Operational ===
+**Resolution:
+***0.1 Degrees Celsius (°C)
+***0.1 percent (%) Relative Humidity
+
+**Communication Protocol
+***Interface: I2C
+***Pins: SDA (data), SCL (clock), VCC (power) and GND (ground)
+=== Spec Sheets ===
+
+== Programming ==
+=== Libraries ===
+=== Useful Functions ===
+
+== FAQ ==
+
+== Projects ==
+
+=== Got a Suggestion for an Edit? ===
+Email us at '''support@microduino.cc'''

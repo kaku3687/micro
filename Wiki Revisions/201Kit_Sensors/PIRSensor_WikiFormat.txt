@@ -1,0 +1,36 @@
+PIRSensor_Wiki
+
+== Description ==
+The Pyroelectric Infrared Sensor can detect changes in heat in an area. PIR is commonly used to detect the movement of people.
+PIR sensors use an infrared probe to passively detect ambient heat over an area with a given range. The Microduino PIR sensor integrates a small processor and a small, highly reliable probe (the AM412) into our standard interface to add PIR sensing to any Microduino project.
+It should be noted that there will be a delayed high level output when the PIR signal exceeds a selected digital threshold. All the signal processing is done on one chip. 
+
+== Specifications ==
+
+=== Dimensions ===
+*Board: 20mm x 10mm
+*Interface: 4-Pin, 1.27mm pitch
+
+=== Electrical ===
+*Input Voltage: 3.3~5V (MAX6V)
+*Current: 15uA
+*Temperature: 20~85°C
+*Output Voltage: High level 5V/ Low level 0V (Digital Output)
+
+=== Operational ===
+*Output Delay Time: ~2.3-3 seconds
+*Sensing Angle: 100°
+*Sensing Distance: 7 meters
+*Pins: Signal, VCC (power), GND (ground) and NC (not connected).
+
+=== Spec Sheets ===
+== Programming ==
+=== Libraries ===
+=== Useful Functions ===
+
+== FAQ ==
+
+== Projects ==
+
+=== Got a Suggestion for an Edit? ===
+Email us at '''support@microduino.cc'''

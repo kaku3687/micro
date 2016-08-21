@@ -1,0 +1,98 @@
+InfraredTransmitter_Tutorial
+
+== Description ==
+This tutorial will walk you through the use of a Microduino Infrared Transmitter. By the end of this tutorial, you will be able to connect the transmitter to any Microduino capable system and program your build to use the device in your project.
+
+The Infrared Transmitter is the same as the emitter in a TV remote. Add this device to any Microduino project and you will suddenly have a remote controllable build!
+
+== Materials ==
+{|class="wikitable"
+|-
+|Module||Number||Function 
+|-
+|[[mCookie-CoreUSB]]||1||Core board 
+|-
+|[[mCookie-Hub]]||1||Sensor pin board 
+|-
+|[[Microduino-IR Transmitter]]||1||Infrared transmission  
+|}
+
+[[File:IR transmitter-module.jpg|center|600px]]
+
+== Instructions ==
+Setup 1: Connect the IR transmitter's interface with the Hub's D6 digital port. 
+[[file:mCookie-IR transmitter-sensor.JPG|600px|center]]
+
+*Setup 2: Connect the Core and Hub, with and IR transmitter to a computer with a USB cable.
+ [[file:mCookie-strandtext-pc.JPG|600px|center]]
+
+== Code ==
+The following code example will use an easy to use library to send remote control signals from the emitter that can be read by a reciever within range.
+
+Open the Arduino IDE and copy the following code into IDE, or select from the examples built into the IDE:
+  File->Examples->_07_Sensor_IRremote->'IRsendDemo'
+
+<source lang="cpp">
+/*
+ * IRremote: IRsendDemo - demonstrates sending IR codes with IRsend
+ * An IR LED must be connected to Arduino PWM pin 3.
+ * Microduino Core:D3
+ * Microduino Core+:D8
+ * Microduino CoreUSB:D6
+ * Microduino CoreRF:D5
+ * Version 0.1 July, 2009
+ * Copyright 2009 Ken Shirriff
+ * http://arcfn.com
+ */
+
+#include <IRremote.h>
+
+IRsend irsend;
+
+void setup()
+{
+  Serial.begin(9600);
+}
+
+void loop() {
+  if (Serial.read() != -1) {
+    for (int i = 0; i < 3; i++) {
+      irsend.sendSony(0xa90, 12); // Sony TV power code
+      delay(100);
+    }
+  }
+}
+</source>  
+
+* Select the right board and COM port, compile and download.  You can refer to [[AVR Core:Getting started]] 
+[[file:upload.JPG|thumb|800px|center]]
+
+* Once you open the Serial Monitor, you can input any values into the console. The LED on the transmitter will blink once the infrared signal has been sent.
+
+== Explanation of Functions ==
+*HEADERS
+The program uses a 'header' file in order to allow communication between a Core Module and the device.
+**#include <IRremote.h>
+Remember, '#include' tells the program, used by the Core module, that the library, or 'header', that follows is needed to run everything correctly. 
+The IRremote library supports use of the IRtransmitter as a remote, using standard remote protocols (like Sony). You won't need to worry about the details of using this library, just know that the header file (<IRremote.h>) needs to be included.
+
+In order to use the functions associated with this library, you will first need to create an Object. An Object gives you access to all of the functions and data associated with the library that it comes from. You will need to declare a unique instance of this Object in order to start using it as in the example:
+'''IRsend irsend'''
+You can name the object whatever you like, so instead of irsend, you can call it:
+'''IRsend transmit'''
+Once you have your object, you can access the function you need by using a dot (.) between the object and the function:
+'''irsend.sendSony();'''
+
+*Functions
+**'''sendSony( data, no_of_bits);'''
+This function will send a signal using the transmitter via the Sony remote control protocol. This means that the emitter can be used as a remote for Sony devices.
+The function itself takes two inputs. The first is the code (data) that is transmitted. In this example, this code corresponds to turning on or off a Sony device. The second input defines the number of bits in the code, in this case 12.
+
+== FAQ ==
+
+== Additional Info ==
+
+== Videos ==
+
+=== Got a Suggestion for an Edit? ===
+Email us at '''support@microduino.cc'''

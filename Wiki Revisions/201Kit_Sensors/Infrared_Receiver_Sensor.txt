@@ -1,0 +1,53 @@
+{| style="width: 800px;"
+|-
+|
+==Outline==
+Microduino-IR receiver is used to receive infrared signal from [[Infrared transmission]]. It can receive infrared signal within 10m.
+
+==Specification==
+*Electrical specification 
+**Operation voltage: 3.3V~5V
+*Tech parameters 
+**Sensing distance:10m
+*Size 
+**Size of the LED:  5mm,
+** Size of the board: 10mm*20mm
+**1.27mm-pitch 4PIN interface 
+*Connection Method  
+**GND, VCC, signal port and NC.  The signal port can be defined by users. 
+==Development==
+===Equipment===
+{|class="wikitable"
+|-
+|Module||Number||Function 
+|-
+|[[mCookie-CoreUSB]]||1||Core board 
+|-
+|[[mCookie-Hub]]||1||Sensor pin board 
+|-
+|[[Microduino-IR Receiver]]||1||Infrared receiving 
+|}
+ [[File:IR receiver-module.jpg|center|600px]]
+===Preparation===
+Setup 1:Connect the IR receiver's interface with the Hub's D10 digital port. 
+[[file:mCookie-IR receiver-sensor.JPG|600px|center]]
+*Setup 2:Connect the core, Hub and IR receiver to a computer with a USB cable.
+[[file:mCookie-strandtext-pc.JPG|600px|center]]
+===Debugging===
+*Open " IRsendDemo " program in the libraries.  
+[[file:mCookie-IRrecvDemo.JPG|thumb|800px|center]]
+* Select the right board and COM port, compile and download.  You can refer to [[AVR Core:Getting started]] 
+ [[file:upload.JPG|thumb|800px|center]]
+*include <IRremote.h>      Use infrared library function
+*int RECV_PIN = 10;      Define the infrared receiving pin as 10, which can also be changed by users. (For example: Change " RECV_PIN = 11" in the program examples to " RECV_PIN = 10". )
+*IRrecv irrecv(RECV_PIN);     Define infrared receiving object 
+*irrecv.enableIRIn();      Start infrared receiving  
+*Receive infrared signal and output   
+  if (irrecv.decode(&results)) {      
+    Serial.println(results.value, HEX);
+    irrecv.resume();
+  }
+* You can open the serial monitor and use the infrared remote controller to send signals to the infrared receiving head. When you see the LED light on the IR-receiver blinks once, it means the receiving head has gotten the signals while the serial console will print decoded data.
+==Application==
+It can be used in infrared remote control, which is able to be matched with all kinds of infrared remote controller. You need to make sure the infrared signal type and protocol format before using.
+|}

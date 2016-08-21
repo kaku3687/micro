@@ -1,0 +1,19 @@
+Standard Module Tutorial
+
+Description
+
+Specifications
+	Dimensions
+	Electrical
+	Technical/Operational
+	Links to Spec Sheets
+
+Programming
+	Libraries
+	Useful Functions
+	
+FAQ
+	
+Projects
+
+Suggestions

@@ -1,0 +1,42 @@
+InfraredTransmitter_Description
+
+== Description ==
+The Microduino IR LED can emit infrared signals just like a remote control. Couple this with an infrared receiver and you can control projects from a distance. The maximum transmission distance for the emitter is 10 meters.
+
+== Specifications ==
+
+=== Dimensions ===
+**LED: 5mm
+**Board: 10mm x 20mm
+**Connector Interface: 4-Pin, 1.27mm pitch
+
+=== Electrical ===
+**Operating Voltage: 3.3-5V
+**This device takes an Input signal
+
+=== Operational ===
+**Emitting Distance: 10 meters
+**Emitting Angle: 25 degrees
+**Wavelength: 940nm
+
+**Interface
+***Pins: D6 (on Hub), VCC (power), GND (ground) and NC (Not Connected)
+***NOTE: To emit at the proper frequency for remote control (38KHz), the sensor must be connected to the correct pin corresponding with the Core module you are using:
+
+*Microduino Core:D3
+*Microduino Core+:D8
+*Microduino CoreUSB:D6
+*Microduino CoreRF:D5
+
+=== Spec Sheets ===
+
+== Programming ==
+=== Libraries ===
+=== Useful Functions ===
+
+== FAQ ==
+
+== Projects ==
+
+=== Got a Suggestion for an Edit? ===
+Email us at '''support@microduino.cc'''

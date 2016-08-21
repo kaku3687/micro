@@ -1,0 +1,106 @@
+InfraredReceiver_Tutorial
+
+== Description ==
+This tutorial will walk you through the use of a Microduino Infrared Receiver. By the end of this tutorial, you will be able to connect the receiver to any Microduino capable system and program your build to use the device in your project.
+
+The Infrared Receiver is the same as the receiver in a TV. Add this device to any Microduino project and you will suddenly have a remote controllable build!
+
+== Materials ==
+{|class="wikitable"
+|-
+|Module||Number||Function 
+|-
+|[[mCookie-CoreUSB]]||1||Core board 
+|-
+|[[mCookie-Hub]]||1||Sensor pin board 
+|-
+|[[Microduino-IR Receiver]]||1||Infrared receiving 
+|}
+ [[File:IR receiver-module.jpg|center|600px]]
+
+== Instructions ==
+Setup 1:Connect the IR receiver's interface with the Hub's D10 digital port. 
+[[file:mCookie-IR receiver-sensor.JPG|600px|center]]
+
+*Setup 2:Connect the Core and Hub, with the IR receiver connected, to a computer with a USB cable.
+[[file:mCookie-strandtext-pc.JPG|600px|center]]
+
+== Code ==
+The following code example will use an easy to use library to receive remote control signals from an emitter that can be read by the reciever.
+
+Open the Arduino IDE and copy the following code into IDE, or select from the examples built into the IDE:
+  File->Examples->_07_Sensor_IRremote->'IRrecvDemo'
+
+ <source lang="cpp">
+  
+ /*
+ * IRremote: IRrecvDemo - demonstrates receiving IR codes with IRrecv
+ * An IR detector/demodulator must be connected to the input RECV_PIN.
+ * Version 0.1 July, 2009
+ * Copyright 2009 Ken Shirriff
+ * http://arcfn.com
+ */
+
+#include <IRremote.h>
+
+int RECV_PIN = 11;
+
+IRrecv irrecv(RECV_PIN);
+
+decode_results results;
+
+void setup()
+{
+  Serial.begin(9600);
+  irrecv.enableIRIn(); // Start the receiver
+}
+
+void loop() {
+  if (irrecv.decode(&results)) {
+    Serial.println(results.value, HEX);
+    irrecv.resume(); // Receive the next value
+  }
+}
+
+</source>
+
+* Select the right board and COM port, compile and download.  You can refer to [[AVR Core:Getting started]] 
+ [[file:upload.JPG|thumb|800px|center]]
+
+•	You can open the Serial Monitor to receive and print data from the infrared transmitter. As a signal is received the LED on the sensor board will blink.
+
+== Explanation of Functions ==
+*HEADERS
+The program uses a 'header' file in order to allow communication between a Core Module and the device.
+**#include <IRremote.h>
+Remember, '#include' tells the program, used by the Core module, that the library, or 'header', that follows is needed to run everything correctly. 
+The IRremote library supports use of the IR receiver. You won't need to worry about the details of using this library, just know that the header file (<IRremote.h>) needs to be included.
+
+In order to use the functions associated with this library, you will first need to create an Object. An Object gives you access to all of the functions and data associated with the library that it comes from. You will need to declare a unique instance of this Object in order to start using it as in the example:
+'''IRrecv irrecv'''
+You can name the object whatever you like, so instead of irsend, you can call it:
+'''IRrecv receive'''
+Once you have your object, you can access the function you need by using a dot (.) between the object and the function:
+'''irrecv.resume();'''
+
+*Functions
+**'''enableIRIn()'''
+This function tells the sensor to start looking for IR signals to receive.
+
+**'''decode()'''
+This function takes the raw signal output from the receiver, and translates it into useful information. 
+This function takes an input of the type 'decode_results' declared at the top of this program. This type is a special object that can store all of the different peices of information decoded from the receiver, including, the number of bits transmitted, the length of the message and the value sent.
+You can return different values from the 'results' by using a dot (.) between the object and the value you want:
+'''results.value'''
+
+**'''resume()'''
+This function is used after a peice of data has been received from the sensor and you wish the sensor to continue to look for another signal.
+
+== FAQ ==
+
+== Additional Info ==
+
+== Videos ==
+
+=== Got a Suggestion for an Edit? ===
+Email us at '''support@microduino.cc'''

@@ -1,0 +1,76 @@
+PhotoresistiveSensor_Tutorial
+
+== Description ==
+This tutorial will walk you through the use of a Microduino Photoresistive Sensor. By the end of this tutorial, you will be able to connect the sensor to any Microduino capable system and program your build to use the device in your project.
+
+The Photoresistive Sensor produces a signal corresponding to a change in ambient light. The example in this tutorial will walk you through reading the values from this sensor.
+
+Couple the Light Sensor with an LED and you can automate the intensity of the LED based on how bright or dark it is in a room.
+
+== Materials ==
+{|class="wikitable"
+|-
+|Module||Number||Function 
+|-
+|[[mCookie-CoreUSB]]||1||Core board 
+|-
+|[[mCookie-Hub]]||1||Sensor pin board 
+|-
+|[[Microduino-Light]]||1||Photosensitive sensor  
+|}
+
+*Other Hardware Equipment 
+**One USB cable 
+[[File:module-light.jpg|600px|center]]
+
+== Instructions ==
+*Setup 1: Connect the Microduino Photoresistor and the A0 analog port of the Hub.  
+[[file:mCookie-pir-sensor.JPG|600px|center]]
+
+*Setup 2: Connect the CoreUSB and Hub, with the sensor connected, to the computer with a USB cable. 
+[[file:mCookie-Light-pc.JPG|600px|center]]
+
+== Code ==
+The following program checks the value from this sensor every 100 milliseconds and prints the results out to the Serial Monitor.
+
+* Open Arduino IDE and copy the following code into IDE.
+<source lang="cpp">
+#define  sensorPin  A0
+
+int state;
+
+void setup()
+{
+  pinMode(sensorPin, INPUT);
+  Serial.begin(9600);
+}
+void loop()
+{
+  state = analogRead(sensorPin);
+  Serial.print("state:");
+  Serial.println(state);
+  delay(100);
+}
+</source>
+
+== Explanation of Functions ==
+**pinMode( , );
+The pinMode function is used with any generic sensor. This tells the program whether a particular pin, which you designate, is either used as Input or Output. In this program:
+'''pinMode(sensorPin, INPUT);'''
+
+This function sets the sensor connected to the sensorPin (which is pin A0 in this program) as an INPUT device. So, the Core module will take in input from the sensor. You can also set this to OUTPUT for devices that produce some sort of output, like an LED.
+
+**analogRead();
+The analogRead function takes the input from an analog sensor. The function will read a voltage value from the sensor (between 0 and 3.3V). The value returned will be an integer between 0 and 255, which is scaled to the voltage range. An analog value is continuous over some range (and with some resolution), as opposed to a digital signal, which can only be either ON or OFF.
+
+In this software example, the returned value from using the analogRead function is stored in a variable we've named 'state':
+'''state = analogRead(sensorPin);'''
+
+== FAQ ==
+
+== Additional Info ==
+
+== Videos ==
+
+=== Got a Suggestion for an Edit? ===
+Email us at '''support@microduino.cc'''

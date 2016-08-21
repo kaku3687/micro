@@ -1,0 +1,97 @@
+TemperatureSensor_Tutorial
+
+== Description ==
+This tutorial will walk you through the use of a Microduino Temperature and Humidity Sensor. By the end of this tutorial, you will be able to connect the sensor to any Microduino capable system and program your build to use data from the sensor in your project.
+
+The Microduino Temperature and Humidity sensor can be used in a range of applications including HVAC systems, dehumidifiers, home automation, data recording or in a weather station.
+
+== Materials ==
+What you will need:
+{|class="wikitable"
+|-
+|Module||Number||Function 
+|-
+|[[mCookie-CoreUSB]]||1||Core board
+|-
+|[[mCookie-Hub]]||1||Sensor pin board 
+|-
+|[[Microduino-Temp&Hum]]||1||Sound detection sensor
+|}
+
+*Other Hardware Equipment 
+**One USB cable  
+[[File:Temp-Hum.jpg|600px|center]]
+
+== Instructions ==
+*Setup 1：Connect the Microduino-Temperature and Humidity Sensor to the IIC port of the Hub. IIC refers to a communication protocol that a number of Microduino devices can communicate with, including this sensor.
+[[file:mCookie-Temp&Hum-sensor.JPG|600px|center]]
+*Setup 2：Stack the CoreUSB and Hub, with the Temp&Hum Sensor attached, together and then connect them to the computer via USB cable. 
+[[file:mCookie-Sound-pc.JPG|600px|center]]
+Great! Now that your hardware is all good to go, we can start programming!
+
+== Code ==
+The following code example will read temperature and humidity values from the sensor and print them out to your screen. 
+Once you have uploaded the software to your Core Module, open up the Serial Monitor and you will see the output from your sensor.
+
+*Open the Arduino IDE and copy the following code into IDE, or select from the examples built into the IDE:
+  File->Examples->_07_Sensor_Temp_Hum_AM2321->'read_simple'
+<source lang="cpp">
+#include <Wire.h>
+#include <AM2321.h>
+
+void setup() {
+  Serial.begin(9600);
+}
+
+void loop() {
+  readByAM2321();
+  delay(500);
+}
+
+void readByAM2321()
+{
+  AM2321 am2321;
+  am2321.read();
+
+  Serial.print("(");
+  Serial.print(am2321.temperature/10.0);
+  Serial.print(", ");
+  Serial.print(am2321.humidity/10.0);
+  Serial.println(')');
+}
+</source>
+*Select the correct board from Tools→Serial Port in Arduino IDE and download the program. 
+[[file:uploadhum.JPG|500px|center]]
+*Open the serial monitor after download. The value displayed reflects the current temperature and humidity.  
+[[file:mCookie-Temp-Hum-reshum.JPG|500px|center]]
+
+== Explanation of Functions ==
+*HEADERS
+The program uses two 'header' files in order to allow communication between a Core Module and the sensor.
+**#include <Wire.h>
+Remember, '#include' tells the program, used by the Core module, that the library, or 'header', that follows is needed to run everything correctly. The Wire library supports communication using the IIC protocol. You won't need to worry about the details of using this library, just know that the header file (<Wire.h>) needs to be included.
+
+**#include <AM2321.h>
+The AM2321.h header is included to use the functions necessary to communicate with the sensor. This header makes very easy to use functions available.
+
+In order to use the functions associated with this library, you will first need to create an Object. An Object gives you access to all of the functions and data associated with the library that it comes from. You will need to declare a unique instance of this Object in order to start using it as in the example:
+'''AM2321 am2321'''
+You can name the object whatever you like, so instead of am2321, you can call it:
+'''AM2321 tempSensor'''
+Once you have your object, you can access the function you need by using a dot (.) between the object and the function:
+'''am2321.read();'''
+
+*Functions
+**AM2321.temperature
+The .temperature function will return the current temperature value read by the AM2321 sensor. You can use this function to store this value in a variable, or print it directly to the Serial output as in the example program.
+**AM2321.humidity
+The .humidity function will return the current humidity value read by the AM2321 sensor. You can use this function to store this value in a variable, or print it directly to the Serial output as in the example program.
+
+== FAQ ==
+
+== Additional Info ==
+
+== Videos ==
+
+=== Got a Suggestion for an Edit? ===
+Email us at '''support@microduino.cc'''
