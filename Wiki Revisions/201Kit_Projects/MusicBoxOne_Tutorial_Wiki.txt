@@ -1,0 +1,82 @@
+MusicBoxOne_Tutorial_Wiki
+
+== Description ==
+This tutorial will show you how to set up a music box that can be controlled using a pair of switches. By the end of the project you will be able to start/stop songs and cycle through a playlist!
+
+[[File: MusicBox_Joystick.jpg|600px|center]]
+
+== Materials ==
+{|class="wikitable"
+|-
+|Module||Number||Function 
+|-
+|[[mCookie-CoreUSB]]||1||Core board
+|-
+|[[ mCookie-Hub]]||1||Sensor pin board 
+|-
+|[[ mCookie-Audio]]||1||Audio module 
+|-
+|[[ mCookie-Amplifier]]||1||Amplifier module
+|-
+| [[mCookie-BM]]||1||Battery management 
+|-
+| [[Microduino-Crash]]||2||Crash sensor
+|}
+
+*Other Equipment: 
+**Two loudspeakers 
+**One cell of battery 
+**At microSD card (for storing music)
+
+ [[File:music_boxz—module.jpg|600px|center]]
+
+== Instructions ==
+*Setup 1:Connect a CoreUSB and PC/MAC with a USB cable, then open the Arduino IDE.
+[[File:CoreUSB_Ble_pc.jpg|600px|center]]
+
+* Setup 2:
+Download program examples: 
+[https://github.com/Microduino/Microduino_Tutorials/tree/master/MCookie_Tutorial/music_box music_box]
+[[File: _MusicBox_Crash_ino.jpg|600px|center]]
+
+* Setup 3:Open downloaded program, choose the right board and COM port and upload the program. 
+[[File: _MusicBox_Crash_ino-ok.jpg|600px|center]]
+
+*Setup 4:Connect two Crash switches to D4 and D6 pins of Sensorhub. 
+ [[file: music_boxz _4_6.JPG|thumb|800px|center]]
+ 
+*Setup 5:Insert TF card into the slot of AudioShield. 
+[[File: _MusicBox_Joystick _TF.jpg|600px|center]]
+
+*Setup 6:Stack Audio and AuidoShield, connect them to PC and then you can save MP3 files into TF card's root directory. 
+[[File: _MusicBox_Joystick _song.jpg|600px|center]]
+
+*Setup 7:Connect two loudspeakers to Amplifier. 
+[[file: MusicBox_Joystick _song_speak.JPG|600px|center]]
+
+*Setup 8:Stack Audio, AudioShield and Amplifier. ?Audio,Audio shield,Amplifier
+[[file: MusicBox_Joystick _3_speak.JPG|600px|center]]
+
+*Setup 9:Connect the activated battery box and BM. 
+[[File:CoreUSB_Ble_steup2.jpg|600px|center]]
+
+*Setup 10:Stack all modules without fixed order (Except that Audio, AudioShield and Amplifier have to be together). 
+[[file: MusicBox_Crash _steup_ok.JPG|600px|center]]
+
+You can now play, pause and skip songs using just a pair of switches. You can also build a beautiful music box for your project using LEGO since mCookie is designed to be easily connected to LEGO pieces.
+
+== Code ==
+The software will check the state of each switch. If the first switch is triggered the music will switch from playing to pause, depending on whether or not anything is currently playing. If the second switch is triggered, the next song in the queue will play if there is more than one song stored in memory.
+
+
+
+== Explanation of Functions ==
+
+== FAQ ==
+
+== Additional Info ==
+
+== Videos ==
+
+=== Got a Suggestion for an Edit? ===
+Email us at '''support@microduino.cc'''

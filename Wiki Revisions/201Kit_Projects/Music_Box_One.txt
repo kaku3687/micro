@@ -1,0 +1,106 @@
+{{Language| Music Box (Key version) }}
+{| style="width: 800px;"
+|-
+|
+==Objective==
+Here we build a music box. By a crash switch, you can play, pause and cut music. 
+[[File: MusicBox_Joystick.jpg|600px|center]]
+==Principle==
+Detect two touch switches' status to trigger music playing, pause and cut.
+[[File:music_boxz.jpg|600px|center]]
+
+==Equipment==
+{|class="wikitable"
+|-
+|Module||Number||Function 
+|-
+|[[mCookie-CoreUSB]]||1||Core board
+|-
+|[[ mCookie-Hub]]||1||Sensor pin board 
+|-
+|[[ mCookie-Audio]]||1||Audio module 
+|-
+|[[ mCookie-Amplifier]]||1||Amplifier module
+|-
+| [[mCookie-BM]]||1||Battery management 
+|-
+| [[Microduino-Crash]]||2||Crash sensor
+|}
+
+*Other Equipment: 
+**Two loudspeakers 
+**One cell of battery 
+
+ [[File:music_boxz—module.jpg|600px|center]]
+==Preperation==
+*Setup 1:Connect CoreUSB and PC/MAC with a USB cable, then open Arduino IDE.
+[[File:CoreUSB_Ble_pc.jpg|600px|center]]
+* Setup 2:
+Download program examples: 
+[https://github.com/Microduino/Microduino_Tutorials/tree/master/MCookie_Tutorial/music_box music_box]
+[[File: _MusicBox_Crash_ino.jpg|600px|center]]
+* Setup 3:Open downloaded program, choose the right board and COM port , download program. 
+[[File: _MusicBox_Crash_ino-ok.jpg|600px|center]]
+==Software Debugging==
+Code description: Judge if the Crash's key is pressed for one part and send serial instructions to control Audio to play, pause and cut according to the status of the key for the other part.
+*" audio.h "controls Audio files and "key.h" detects files when the key is pressed.
+*The use of Audio serial port can be decided by jumper wires on the board. The default soft serial port is (2,3).
+<source lang="cpp">
+<source lang="cpp">
+#include <SoftwareSerial.h>
+
+SoftwareSerial mySerial(2, 3); // RX, TX
+
+#define AUDIO_PORT mySerial   
+//#define AUDIO_PORT mySerial  
+</source>
+
+</source>
+*Key controls pin definition 
+<source lang="cpp">
+int music1_Pin = 4;
+int music2_Pin = 6;
+</source>
+
+*Send serial instructions to control Audio's playing, pause or cut according to if the key is pressed. 
+<source lang="cpp">
+  if (key_get(music1_Pin, 0))
+  {
+    delay(200);
+    play_pause = !play_pause;
+  }
+  if (play_change != play_pause)
+  {
+    play_change = play_pause;
+    if (play_pause)
+      audio_play();
+    else
+      audio_pause();
+  }
+  if (key_get(music2_Pin, 0))
+    audio_down();
+</source>
+
+==Hardware Buildup ==
+*Setup1:Connect two Crash switches to D4 and D6 pins of Sensorhub. 
+ [[file: music_boxz _4_6.JPG|thumb|800px|center]]
+*Setup 2:Insert TF card into the slot of AudioShield. 
+[[File: _MusicBox_Joystick _TF.jpg|600px|center]]
+*Setup 3:Stack Audio and AuidoShield, connect them to PC and then you can save MP3 files into TF card's root directory. 
+[[File: _MusicBox_Joystick _song.jpg|600px|center]]
+*Setup4:Connect two loudspeakers to Amplifier. 
+[[file: MusicBox_Joystick _song_speak.JPG|600px|center]]
+*Setup5:Stack Audio, AudioShield and Amplifier. ?Audio,Audio shield,Amplifier
+[[file: MusicBox_Joystick _3_speak.JPG|600px|center]]
+*Setup6:Connect the activated battery box and BM. 
+[[File:CoreUSB_Ble_steup2.jpg|600px|center]]
+*Setup7:Stack all modules without fixed order (Except that Audio, AudioShield and Amplifier have to be together). 
+[[file: MusicBox_Crash _steup_ok.JPG|600px|center]]
+
+==Result==
+Choosing to play, pause and cut songs via the crash switch. You can also build a beautiful shell for your project with LEGO since mCookie can be easily stacked with LEGO. 
+[[file: music_boxz _legao.JPG|thumb|800px|center]]
+
+==Video==
+
+|}

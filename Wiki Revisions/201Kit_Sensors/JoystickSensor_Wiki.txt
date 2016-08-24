@@ -1,0 +1,35 @@
+JoystickSensor_Desription
+
+== Description ==
+The Microduino Joystick sensor is two analog output devices in one. There are resistors on the X-axis and Y-axis that each output an analog value corresponding to the position of the joystick on that axis.
+This sensor is great for controlling projects, especially ones that move.
+
+== Specifications ==
+=== Dimensions ===
+*Switch: 17mm x 17mm
+*Board: 20mm x 24mm
+
+=== Electrical ===
+*Analog Output Device
+*Analog Output: 0-1023 (with Microduino Core modules)
+
+*Connection Interface 
+**Pins: Signal 1 (X-Axis), Signal 2 (Y-Axis), VCC (power) and GND (ground)
+**Must be connected to analog capable ports (A0-A7)
+[[File:Joystick-line.jpg|center|400px]]
+
+=== Operational ===
+*Analog Output Corresponding to X and Y-axis displacement
+
+=== Spec Sheets ===
+
+== Programming ==
+=== Libraries ===
+=== Useful Functions ===
+
+== FAQ ==
+
+== Projects ==
+
+=== Got a Suggestion for an Edit? ===
+Email us at '''support@microduino.cc'''

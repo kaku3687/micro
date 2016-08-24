@@ -1,0 +1,90 @@
+JoystickSensor_Tutorial_Wiki
+
+== Description ==
+This tutorial will walk you through the use of a Microduino Joystick Sensor. By the end of this tutorial, you will be able to connect the sensor to any Microduino capable system and program your build to use the device in your project.
+
+The Joystick gives you 2D control over any project, just like a game controller.
+
+== Materials ==
+{|class="wikitable"
+|-
+|Module||Number||Function 
+|-
+|[[mCookie-CoreUSB]]||1||Core board 
+|-
+|[[mCookie-Hub]]||1||Sensor pin board 
+|-
+|[[Microduino-Joystick]]||1||Joystick sensor 
+|}
+
+*Other Hardware Equipment 
+**One USB cable  
+[[File:module-joystick.jpg|600px|center]]
+
+== Instructions ==
+*Setup 1:Connect Microduino-Joystick to the Hub's A0/A1 analog ports. 
+[[file:mCookie-joystick.JPG|600px|center]]
+*Setup 2:Stack the CoreUSB and Hub, with the Joystick connected, together and then connect them to the computer with a USB cable.
+[[file:mCookie-joystick.JPG|600px|center]]
+
+== Code ==
+The following code example will output the values from each axis of the joystick sensor as you use it.
+
+Open the Arduino IDE and copy the following code into the IDE:
+
+<source lang="cpp">
+#define Pin_X A1
+#define Pin_Y A0
+
+void setup() {
+  Serial.begin(9600);    //Serial initializing 
+  pinMode(Pin_X,INPUT);
+  pinMode(Pin_Y,INPUT);
+}
+
+void loop() {
+  int sensorValueX = analogRead(Pin_X);      //X-axis input 
+  int sensorValueY = analogRead(Pin_Y);      //Y-axis input 
+  Serial.print("ValueX:");
+  Serial.print(sensorValueX);
+  Serial.print(",");
+  Serial.print("ValueY:");
+  Serial.println(sensorValueY);
+  delay(100);
+}
+</source>
+
+* Select the right board from Tools->Serial Port in Arduino IDE and upload the program. [[file:upload.JPG|500px|center]]
+
+* After the upload, you can open the serial monitor. The displayed values reflect the current displacement analog values on both the X-and Y-axes.  
+[[file:mCookie-pir-res.JPG|500px|center]]
+
+*The right shift value decrease on the X-axis, close to zero while the left shift value increases and gets close to 1,023. 
+The top shift value decrease on the Y-axis, close to zero while the downward shift value increases and gets close to 1,023.
+
+== Explanation of Software ==
+*Functions
+**pinMode( , );
+The pinMode function is used with any generic sensor. This tells the program whether a particular pin, which you designate, is either used as Input or Output. In this program:
+'''pinMode(Pin_X, INPUT);'''
+'''pinMode(Pin_Y, INPUT);'''
+This function sets the sensor connected to the Pins (which are pin A0 and A1 in this program) as INPUT devices. So, the Core module will take in input from the sensor. You can also set this to OUTPUT for devices that produce some sort of output, like an LED.
+Pin_X and Pin_Y are the analog pins connected to the X and Y-axis, respectively, of the sensor. These pins are defined at the beginnning of the program:
+'''#define Pin_X A1'''
+'''#define Pin_Y A0'''
+
+**analogRead();
+The analogRead function takes the input from an analog sensor. The function will read a voltage value from the sensor (between 0 and 3.3V). The value returned will be an integer between 0 and 255, which is scaled to the voltage range. An analog value is continuous over some range (and with some resolution), as opposed to a digital signal, which can only be either ON or OFF.
+
+In this software example, the returned values from using the analogRead function are stored in variables we've named 'sensorValueX' and 'sensorValueY':
+'''sensorValueX = analogRead(Pin_X);'''
+'''sensorValueY = analogRead(Pin_Y);'''
+
+== FAQ ==
+
+== Additional Info ==
+
+== Videos ==
+
+=== Got a Suggestion for an Edit? ===
+Email us at '''support@microduino.cc'''
