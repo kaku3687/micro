@@ -1,0 +1,33 @@
+CrashSensor_Description
+
+== Description ==
+The Microduino Crash Sensor is basically a switch for adding some control to your projects. While open, the switch doesn't allow current to flow and the signal read from the sensor is a digital HIGH. When closed, current flows and the sensor reads LOW.
+
+Use this sensor as an input device for controlling your projects, or mount it onto projects to check and see if something has collided with the sensor (like a smart robot).
+
+== Specifications ==
+=== Dimensions ===
+*Switch: 12mm x 6mm
+*Board: 20mm x 20mm
+*Interface: 4-Pin, 1.27mm pitch
+
+=== Electrical ===
+*Operating Voltage: 3.3-5V
+*This device produces an Output signal
+
+=== Operational ===
+*This devices produces a digital Output signal
+*Pins: Signal, VCC(power), GND(ground) and NC(Not Connected)
+
+=== Spec Sheets ===
+
+== Programming ==
+=== Libraries ===
+=== Useful Functions ===
+
+== FAQ ==
+
+== Projects ==
+
+=== Got a Suggestion for an Edit? ===
+Email us at '''support@microduino.cc'''

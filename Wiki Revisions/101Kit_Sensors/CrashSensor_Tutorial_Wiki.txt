@@ -1,0 +1,88 @@
+CrashSensor_Tutorial_Wiki
+
+== Description ==
+
+
+== Materials ==
+{|class="wikitable"
+|-
+|Module||Number||Function 
+|-
+|[[mCookie-CoreUSB]]||1||Core board 
+|-
+|[[mCookie-Hub]]||1||Sensor pin board  
+|-
+|[[Microduino-Crash]]||1||Collision sensor 
+|-
+|[[Microduino-Color LED]]||1||Colored LED sensor  
+|}
+
+[[File:Crash-module.jpg|center|600px]]
+
+*Other Hardware Equipment 
+**One USB cable 
+**Two sensor cables  
+
+== Instructions ==
+*Setup 1: Connect the interface of Crash Sensor with the D6 digital port of Hub. (D6 is also the control pin of the Crash switch, which can be changed freely.)
+[[file:mCookie-Crash-sensor.JPG|600px|center]]
+
+*Setup 2: Connect the CoreUSB and HUB, with the Crash Sensor attached, to the computer with a USB cable. 
+[[file:MCookie-Crash-pc.JPG|600px|center]]
+
+== Code ==
+*Open the Arduino IDE and copy the following code into the IDE.
+<source lang="cpp">
+#define pushButton  6
+
+int buttonState;
+
+// the setup routine runs once when you press reset:
+void setup() {
+  // initialize serial communication at 9600 bits per second:
+  Serial.begin(9600);
+  // make the pushbutton's pin an input:
+  pinMode(pushButton, INPUT);
+}
+
+// the loop routine runs over and over again forever:
+void loop() {
+  // read the input pin:
+  buttonState = digitalRead(pushButton);//Read the input value of the Crash.
+  // print out the state of the button:
+  Serial.print("buttonState:");
+  Serial.println(buttonState);  //Print the value in the serial port. 
+  delay(100);     // 100ms time delay 
+}
+</source>
+
+*Select the right board and COM port, compile and download. 
+[[file:uploadcrash1.JPG|600px|center]]
+[[file:uploadcrash2.JPG|600px|center]]
+
+*Open the serial monitor. 
+[[file:comxx1.JPG|600px|center]]
+
+*You'll see the value of " buttonState" is 1 when not pressing or 0 when pressing. 
+
+== Explanation of Functions ==
+**pinMode( , );
+The pinMode function is used with any generic digital sensor. This tells the program whether a particular pin, which you designate, is either used as Input or Output. In this program:
+'''pinMode(pushButton, INPUT);'''
+
+This function sets the sensor connected to the pushButton (which is pin 6 in this program) as an INPUT device. So, the Core module will take in input from the sensor. You can also set this to OUTPUT for devices that produce some sort of output, like an LED.
+
+**digitalRead();
+The digitalRead function takes the input from a digital sensor. The function will check if the digital sensor has a state of being either HIGH or LOW and return that value. Remember, a digital signal can only be either HIGH or LOW, where, electronically, HIGH corresponds to 5V and LOW corresponds to 0V.
+
+In this software example, the returned from using the digitalRead function is stored in a variable we've named 'buttonState':
+'''buttonState = digitalRead(pushButton);'''
+
+== FAQ ==
+
+== Additional Info ==
+
+== Videos ==
+
+=== Got a Suggestion for an Edit? ===
+Email us at '''support@microduino.cc'''

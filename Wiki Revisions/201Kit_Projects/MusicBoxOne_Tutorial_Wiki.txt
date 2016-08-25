@@ -71,6 +71,74 @@ The software will check the state of each switch. If the first switch is trigger
 
 
 == Explanation of Functions ==
+*HEADERS
+The program uses a 'header' file in order to allow use of different functions with the Audio module hardware:
+
+**#include "audio.h"
+**#include "key.h"
+The audio.h file has functions for playing back and controlling music. This includes functions for initializing an audio device, increasing and decreasing the volume out of a device and cycling through different audio files. 
+You won't need to worry about the details of using this library, just know that the header files need to be included.
+
+*FUNCTIONS
+**'''key_init()'''
+This function initializes the key library so that you can add digital pins to control your music player. It is required in the setup of any sketch where you wish to control music play using digital input devices (such as switches).
+
+**'''key_get()'''
+This function attaches the state of the switch, either on or off, to control of the audio output. In this example, key_get attaches music1_Pin (a switch) to playing music if music isn't playing, and vice-versa:
+<source lang="cpp">
+ if (key_get(music1_Pin, 0))
+  {
+    delay(200);
+    play_pause = !play_pause;
+  }
+</source>
+
+**'''audio_pause()'''
+This function pauses the output of music. It is good to use this function in the setup so that music doesn't automatically start playing (unless that's what you want).
+
+**'''audio_init()'''
+This function initializes the audio playback module. In the case of this example, it sets some values that are standard to most builds using the mCookie Audio module including DEVICE_Flash and MODE_loopOne. The loop option defines how you would like the audio module to cycle through a set of songs. There are four options for this input:
+#MODE_loopAll 0
+#MODE_loopOne 1
+#MODE_One_STOP 2
+#MODE_One_END  4
+
+The third parameter for setting this function is the initial volume setting. For this example, the volume is initially set to 25:
+<source lang="cpp">
+int music_vol = 25;
+audio_init(DEVICE_Flash, MODE_loopOne, music_vol);
+</source>
+
+**'''audio_play()'''
+This function will play music from the audio module.
+
+**'''audio_down()'''
+This function will play the next audio file in the queue (assuming there are more than one files on the SD card).
+
+*CODE EXAMPLE
+The main portion of this software example checks if the first key is pressed and, if it is, it switches the state of play (play music if it isn't already and stop music if it is playing):
+<source lang="cpp">
+  if (key_get(music1_Pin, 0))
+  {
+    delay(200);
+    play_pause = !play_pause;
+  }
+  if (play_change != play_pause)
+  {
+    play_change = play_pause;
+    if (play_pause)
+      audio_play();
+    else
+      audio_pause();
+  }
+
+The program then checks if the second switch is triggered and, if it is, changes the song:
+</source>
+if (key_get(music2_Pin, 0))
+    audio_down();
+<source lang="cpp">
+
+</source>
 
 == FAQ ==
 

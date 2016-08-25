@@ -1,0 +1,29 @@
+BuzzerSensor_Description
+
+== Description ==
+The Microduino Buzzer is a passive buzzer that uses timed signals to produce different tones/sounds.
+
+== Specifications ==
+=== Dimensions ===
+*Board: 20mm x 20mm
+*Interface: 4-Pin, 1.27mm pitch
+
+=== Electrical ===
+*Operating Voltage: 3.3~5V
+*This device takes input from a Core module to produce Output.
+
+=== Operational ===
+
+
+=== Spec Sheets ===
+
+== Programming ==
+=== Libraries ===
+=== Useful Functions ===
+
+== FAQ ==
+
+== Projects ==
+
+=== Got a Suggestion for an Edit? ===
+Email us at '''support@microduino.cc'''

@@ -1,0 +1,267 @@
+{| style="width: 800px;"
+|-
+|
+==Outline==
+
+It is used for detecting collision. Therefore it can also be called collision signal sensor. Due to different collision direction, we can divide Microduino-Crash into left-Crash and right-Crash. 
+<br />
+Crash switch can turn mechanical quantity to electricity. When this sensor collided with an object, it'll cause circuit switch close. So, the circuit loop will be opened, the LED will be lighten and the voltage between the two sides of the sensor will turn high level to low.
+<br />
+Microduino-Crash judges collision by detecting the electrical level between its two side. It can used in limit and anti-collision such as 3D print motor limit switch and robot anti collision.   
+==Specification==
+
+
+*Electrical specification 
+**Operation voltage: 5V
+**Input device 
+*Tech parameters 
+**Pin description: GND, VCC, signal input and NC(Empty). 
+**Digital input 
+
+*Size 
+**Size of the Switch: 12mm*6mm,
+**Size of the Board: 20mm*20mm
+**1.27mm-pitch 4Pin interface connected with Sensorhub 
+*Connection method 
+**Include left-crash and right-crash   
+==Development==
+===Equipment===
+{|class="wikitable"
+|-
+|Module||Number||Function 
+|-
+|[[mCookie-CoreUSB]]||1||Core board 
+|-
+|[[mCookie-Hub]]||1||Sensor pin board  
+|-
+|[[Microduino-Crash]]||1||Collision sensor 
+|-
+|[[Microduino-Color LED]]||1||Colored LED sensor  
+|}
+
+[[File:Crash-module.jpg|center|600px]]
+
+*Other Hardware Equipment 
+**One USB cable 
+**Two sensor cables  
+
+===Preparation===
+*Setup 1:?Connect the interface of Crash with the D6 digital port of Hub. (D6 is also the control pin of the Crash switch, which can be changed freely by users.)
+[[file:mCookie-Crash-sensor.JPG|600px|center]]
+*Setup 2:Connect the CoreUSB, HUB and Crash to the computer with a USB cable. 
+[[file:MCookie-Crash-pc.JPG|600px|center]]
+
+==Debugging==
+===Experiment One: Key Detection ===
+*Open Arduino IDE and copy the following code into IDE.  
+<source lang="cpp">
+#define pushButton  6
+
+int buttonState;
+
+// the setup routine runs once when you press reset:
+void setup() {
+  // initialize serial communication at 9600 bits per second:
+  Serial.begin(9600);
+  // make the pushbutton's pin an input:
+  pinMode(pushButton, INPUT);
+}
+
+// the loop routine runs over and over again forever:
+void loop() {
+  // read the input pin:
+  buttonState = digitalRead(pushButton);//Read the input value of the Crash.
+  // print out the state of the button:
+  Serial.print("buttonState:");
+  Serial.println(buttonState);  //Print the value in the serial port. 
+  delay(100);     // 100ms time delay 
+}
+</source>
+*Select the right board and COM port, compile and download. 
+
+[[file:uploadcrash1.JPG|600px|center]]
+[[file:uploadcrash2.JPG|600px|center]]
+*Open the serial monitor. 
+[[file:comxx1.JPG|600px|center]]
+*You'll the value of " buttonState " is 1 when not pressing or 0 when pressing. 
+'''*Adopt " digitalRead(XX " to read the key signal, which is digital with the status of "0" or "1".
+
+===Experiment Two: Press down or Release the Key ===
+* Open Arduino IDE and copy the following code into IDE. 
+<source lang="cpp">
+#define pushButton  6 //Define the control pin of the key. 
+
+int buttonState, num;
+
+// the setup routine runs once when you press reset:
+void setup() {
+  // initialize serial communication at 9600 bits per second:
+  Serial.begin(9600);
+  // make the pushbutton's pin an input:
+  pinMode(pushButton, INPUT);
+}
+
+// the loop routine runs over and over again forever:
+void loop() {
+  // read the input pin:
+  buttonState = digitalRead(pushButton);//Read the input value of the Crash. 
+  // print out the state of the button:
+  //Print the value when pressing down or releasing the key. 
+  if (num != buttonState)
+  {
+    num = buttonState;
+    if (num == 1)
+      Serial.println("Loosen");//Release 
+    else
+      Serial.println("Control");//Press down 
+    delay(100);     // 100ms time delay 
+  }
+}
+</source>
+*The status changes from "1" to "0" when pressing down or from "0" to "1" when releasing. From the data change, you can judge the status. 
+*“!=”means "Not Equal to", which performs when the press-down value changes.
+*Result: Open the serial monitor and you'll see "Control" printed when pressing the key or "Loosen" printed when releasing.  
+[[file:Crash-two-res3.JPG|600px|center]]
+
+===Experiment Three: Pressing status change ===
+* Open Arduino IDE and copy the following code into IDE.
+<source lang="cpp">
+#define pushButton  6
+
+int buttonState;
+
+boolean str;
+
+// the setup routine runs once when you press reset:
+void setup() {
+  // initialize serial communication at 9600 bits per second:
+  Serial.begin(9600);//Serial communication baud rate
+  // make the pushbutton's pin an input:
+  pinMode(pushButton, INPUT);
+}
+
+// the loop routine runs over and over again forever:
+void loop() {
+  // read the input pin:
+  buttonState = digitalRead(pushButton);//Read the input value of the Crash. 
+  if (!buttonState)
+  {
+    delay(300);
+    str = !str;
+    Serial.print("str:");
+    Serial.println(str);
+  }
+}
+</source>
+*“= !”means "Not equal to". Since the "str" value only exists "True" or "False", every time it runs, the "str" value will change once.  
+Press once, the "str" value is True(1) or twice, the value is False(1).  
+[[file:Crash-three-res1.JPG|600px|center]]
+
+===Experiment Four: Short pressing & Long pressing function===
+* Open Arduino IDE and copy the following code into IDE.
+<source lang="cpp">
+#define pushButton  6
+
+int buttonState, num;
+
+unsigned long button_time_cache = 0;
+unsigned long button_time = 0;
+
+boolean button_sta = false;
+
+void setup() {
+  // initialize serial communication at 9600 bits per second:
+  Serial.begin(9600);
+  // make the pushbutton's pin an input:
+  pinMode(pushButton, INPUT);
+}
+
+void loop() {
+  // read the input pin:
+  buttonState = digitalRead(pushButton);// Read the input value of the Crash.
+
+  if (buttonState == 0)
+  {
+    delay(100);
+    if (digitalRead(pushButton) == 1 && !button_sta)//Loosen the key and do not enter long pressing, meaning short pressing.
+    {
+      Serial.println("short");
+    }
+    else if (millis() - button_time_cache > 1500) //The pressing time is longer than 1.5s, meaning long pressing. 
+    {
+      button_sta = true;  
+      button_time_cache = millis();
+      Serial.println("long");
+    }
+  }
+  else  if (buttonState == 1)
+  {
+    button_time_cache = millis();
+    button_sta = false;
+  }
+}
+</source>
+*When pressing the key, if you don't loosen the key in a certain time, we call it long pressing and vice versa. 
+*"short" will be printed in the serial port when short pressing or "long" when long pressing.   
+ [[file:Crash-long-short-res4.JPG|600px|center]]
+
+===Experiment Five: Colored Light Control ===
+*Open Arduino IDE and copy the code into IDE. 
+<source lang="cpp">
+#define PIN_LED A0
+#define PIN_key 6
+
+boolean status=false;
+
+#include <Adafruit_NeoPixel.h>
+Adafruit_NeoPixel strip = Adafruit_NeoPixel(6, PIN_LED, NEO_GRB + NEO_KHZ800);
+
+void setup() 
+{
+  pinMode(PIN_key, INPUT);
+  pinMode(PIN_LED, OUTPUT);
+
+  strip.begin();	// Initialize the LED
+  strip.show(); // Initialize all pixels to 'off'
+}
+
+// the loop function runs over and over again forever
+void loop() 
+{
+  if(!digitalRead(PIN_key))
+  {
+    delay(100);
+    if(!digitalRead(PIN_key))
+    {
+      status=!status;
+    }
+  }
+
+  if(status)
+  {
+    colorWipe(strip.Color(0, 0, 0), 10);	//Close the light  
+  }
+  else
+  {
+    colorWipe(strip.Color(255, 0, 0), 10);	//Blue 
+  }
+}
+
+// Fill the dots one after the other with a color
+void colorWipe(uint32_t c, uint8_t wait) 
+{
+  for(uint16_t i=0; i<strip.numPixels(); i++) 
+  {
+    strip.setPixelColor(i, c);
+    strip.show();
+    delay(wait);
+  }
+}
+</source>
+*Connect the Crash sensor to D6 and the colored light to A0. 
+[[File:Crash-sensor.jpg|600px|center]]
+*Pressing one time turns on the light or pressing twice turns off the light.
+
+==Video==
+
+|}

@@ -1,0 +1,74 @@
+BluetoothNightLight_Tutorial
+
+== Description ==
+This project will walk you through building a night light. The night light will be able to detect when it gets dark and turn an LED on. It is also controllable by phone via bluetooth!
+
+== Materials ==
+{|class="wikitable"
+|-
+|Module||Number||Function 
+|-
+|[[Microduino-CoreUSB]]||1||Core board 
+|-
+|[[Microduino-Sensorhub]]||1||Sensor pinboard  
+|-
+|[[Microduino-BT]]||1||Bluetooth module 
+|-
+| [[Microduino-Light]]||1||Light-sensitive sensor 
+|-
+| [[Microduino-Color LED]]||1||Colored LED light 
+|-
+| [[Microduino-BM]]||1||Battery management  
+|}
+ [[File:ble_night_light-moduino.jpg|600px|center]]
+
+== Instructions ==
+*Setup 1: Use a USB cable to connect the CoreUSB to a PC/Mac, then open Arduino IDE.
+[[File:CoreUSB_Ble_pc.jpg|600px|center]]
+
+*Setup 2: Open the sketch: File >Examples > mCookie > _201_CowardlyNightLight_BLE, and upload the program to the Core module.  
+[[File: light_indicator-ino.jpg|600px|center]]
+
+* Setup 3: When loading the code, choose the right board and COM port. 
+ [[File: light_indicator-com.jpg|600px|center]]
+
+== Code ==
+The code for this tutorial will regularly check the value of a light-sensitive resistor. If this value tells the system that it's light out, the LED will be turned off:
+<source lang="cpp">
+sensorValue = analogRead(lightSensorPin); // read the value of sensor 1
+  
+  if(sensorValue>lightSwitch) {
+    Serial.println(sensorValue);
+    strip.setPixelColor(0, strip.Color(0, 0, 0));
+    strip.setPixelColor(1, strip.Color(0, 0, 0));
+    strip.show();
+  }
+</source>
+
+You will notice that sensorValue is the reading taken from the light sensor and lightSwitch is the threshold set at the beginning of the program:
+<source lang="cpp">
+#define lightSwitch  700
+</source>
+You can increase or decrease this value to your preference.
+
+If the sensor has not reached that threshold (i.e. it's dark), the system will check to see if there are any commands from the bluetooth app. If there are, the system will execute those commands to produce the desired LED behavior. If there are no commands from bluetooth, it will default to the 'rainbow' function, where it cycles through several colors:
+<source lang="cpp">
+else {
+      ble();
+      if (!color_en) {
+        for (int i = 0; i < 1; i++)
+          rainbow(10);
+      }
+  }
+</source>
+
+== Explanation of Functions ==
+
+== FAQ ==
+
+== Additional Info ==
+
+== Videos ==
+
+=== Got a Suggestion for an Edit? ===
+Email us at '''support@microduino.cc'''

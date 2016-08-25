@@ -1,0 +1,111 @@
+LED_Tutorial
+
+== Description ==
+This tutorial will walk you through the use of a Microduino Color LED. By the end of this tutorial, you will be able to integrate Color LEDs into your project.
+
+== Materials ==
+{|class="wikitable"
+|-
+|Module||Number||Function 
+|-
+|[[mCookie-CoreUSB]]||1||Core board 
+|-
+|[[mCookie-Hub]]||1||Sensor pin board  
+|-
+|[[Microduino-Color LED]]||1||Colored LED light 
+|}
+*Other Equipment 
+**One USB cable 
+**One sensor cable  
+[[File:color_led-module.jpg|center|600px]]
+
+== Instructions ==
+*Setup 1:Connect the '''IN''' port on the back of the Color LED with the D6 port of the Hub. (D6 is the LED control pin, which can be freely changed by users).
+[[file:mCookie-strandtext-sensor.JPG|600px|center]]
+
+*Setup 2:Connect the CoreUSB and Hub, with the Color LED attached, to the computer with a USB cable.  
+[[file:mCookie-strandtext-pc.JPG|600px|center]]
+
+== Code ==
+The following code example will use and easy to use library to control the color of the LED module.
+
+Open the Arduino IDE and copy the following code into the IDE:
+<source lang="cpp">
+#include <Adafruit_NeoPixel.h>
+
+#define PIN 6   //led control pin   
+#define PIN_NUM 2 //Light number allowed  
+
+Adafruit_NeoPixel strip = Adafruit_NeoPixel(PIN_NUM, PIN, NEO_GRB + NEO_KHZ800);
+
+void setup() {
+  strip.begin();
+  strip.show(); 
+}
+
+void loop() {
+  colorWipe(strip.Color(255, 0, 0), 500); // The first light goes read and after 500ms, the second light will go red. 
+  colorWipe(strip.Color(0, 255, 0), 500); // The first light goes read and after 500ms, the second light will go green.
+  colorWipe(strip.Color(0, 0, 255), 500); // The first light goes read and after 500ms, the second light will go blue.
+}
+
+// Fill the dots one after the other with a color
+void colorWipe(uint32_t c, uint8_t wait) {
+  //Let each light turn to a specific color in loop. "C" indicates color; "wait" represents the time duration of each light . 
+  for (uint16_t i = 0; i < strip.numPixels(); i++) {
+    strip.setPixelColor(i, c);
+    strip.show();
+    delay(wait);
+  }
+}
+</source>
+
+*Select the right board and COM port, compile and download directly. 
+[[file:upload1.JPG|thumb|800px|center]]
+
+*When compiling, it'll remind you to save the project. Users can save it to your folder and name it freely. 
+
+*Upload after compiling and you can see the finishing notice. 
+[[file:Picture1.png|thumb|600px|center]]
+
+== Explanation of Functions ==
+*HEADERS
+**'''#include <Adafruit_NeoPixel.h>'''
+The Adafruit_NeoPixel library gives you a set of functions for controlling the Color LED. 
+In order to use the functions associated with this library, you will first need to create an Object. An Object gives you access to all of the functions and data associated with the library that it comes from. You will need to declare a unique instance of this Object in order to start using it as in the example:
+'''Adafruit_NeoPixel strip'''
+You can name the object whatever you like, so instead of irsend, you can call it:
+'''Adafruit_NeoPixel leds'''
+Once you have your object, you can access the function you need by using a dot (.) between the object and the function:
+'''strip.show();'''
+
+*FUNCTIONS
+**'''begin()'''
+The begin() function starts communication between the Core module and the Color LED. It's necessary to use this function in the '''setup''' of any Microduino project using the Color LED.
+
+**'''setPixelColor()'''
+The setPixelColor function will set the RGB values for the LED in the chain you select:
+'''setPixelColor(led_Num, R_value, G_value, B_value)'''
+
+For example, the command:
+'''strip.Color(0, 255, 0, 0);'''
+will set the first LED in the chain to all Red.
+
+A variant of this function takes the same information, but compacts the RGB values into one:
+'''setPixelColor(led_Num, RGB_value (32-bit))'''
+
+**'''show()'''
+The show() function pushes the LED values set by setPixelColor() to the Color LED over I2C. So, you need to call this function to update the actual color of the LED everytime you change the color:
+<source lang="cpp"> 
+ strip.setPixelColor(0, 255, 0, 0);
+ strip.show();
+</source>
+
+== FAQ ==
+
+== Additional Info ==
+
+== Videos ==
+
+=== Got a Suggestion for an Edit? ===
+Email us at '''support@microduino.cc'''

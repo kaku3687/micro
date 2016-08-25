@@ -1,0 +1,38 @@
+SoundDetectionSensor_Description
+
+== Description ==
+The Microduino Sound Detection Sensor is a small electret-condenser microphone. The vibrating sound is translated into a voltage that can be read by the mCookie Core module.
+
+Use this sensor in projects where you would like sound activated behavior.
+
+== Specifications ==
+=== Dimensions ===
+*Sensor: 5mm x 5mm
+*Board: 20mm x 20mm
+*Interface: 4-Pin, 1.27mm pitch
+
+=== Electrical ===
+*Operating Voltage: 3~5V
+*This device produces Output that is read as Input by a Core module
+
+=== Operational ===
+*Sensor Output: 0~5V (100Hz~4KHz) Analog Signal
+*Read Value Range (w/Core modules): 0-1023
+*Sound Intensity: 45~120dB
+*Accuracy:±1%
+*Pin Description: Signal, VCC(Power), GND(Ground) and NC(Not Connected)
+
+*NOTE: Because this is an Analog sensor, it must be connected to a port capable of Analog input -- A0-A7.
+
+=== Spec Sheets ===
+
+== Programming ==
+=== Libraries ===
+=== Useful Functions ===
+
+== FAQ ==
+
+== Projects ==
+
+=== Got a Suggestion for an Edit? ===
+Email us at '''support@microduino.cc'''

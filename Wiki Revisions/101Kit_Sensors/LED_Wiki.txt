@@ -1,0 +1,37 @@
+LED_Description
+
+== Description ==
+The Microduino LED is a multicolor RGB LED. RGB stands for Red-Green-Blue. The device itself has three small LEDs of these three primary colors and a control chip.
+By sending a control signal that includes the intensity of each light color (RGB), you can create any of 16,777,216 colors! 
+The device is also designed so that you can chain a string of LEDs together and address each one individually with a unique color.
+
+== Specifications ==
+=== Dimensions ===
+**LED: 5mm
+**Board: 20mm x 20mm
+**Interface: 4-Pin, 1.27mm pitch; there are two of these ports on each board so that you can chain LEDs together.
+[[File: CoreUSB_Ble_steup11.jpg|600px|center]]
+
+=== Electrical ===
+**Operating Voltage: 3.3-5V
+**This device produces an Output
+
+=== Operational ===
+**WS2812 Light Source Controller
+**255-level brightness per LED
+**400Hz refresh rate
+**Communication Protocol: I2C
+
+=== Spec Sheets ===
+[[File:ws2812.pdf]]
+
+== Programming ==
+=== Libraries ===
+=== Useful Functions ===
+
+== FAQ ==
+
+== Projects ==
+
+=== Got a Suggestion for an Edit? ===
+Email us at '''support@microduino.cc'''

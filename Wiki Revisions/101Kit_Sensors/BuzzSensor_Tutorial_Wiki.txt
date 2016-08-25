@@ -1,0 +1,143 @@
+BuzzSensor_Tutorial
+
+== Description ==
+This tutorial will introduce you the use of Microduino-Buzzer through three experiments.
+[[File:MicroduinoBuzzer.jpg|600px|center]]
+
+Generally, buzzer can be classified as active buzzer and passive buzzer. Microduino-Buzzer adopts passive buzzer. 
+*Active buzzer
+**With vibration and driving circuit inside, it can make sound when adding voltage signal(high level) 
+***Advantage: Convenient 
+***Disadvantage: With only one single-tone due to fixed frequency. 
+*Passive buzzer 
+**Since there is no vibration inside, you have to use alternating current signal instead of direct-current signal to drive it. 
+***Advantage: With controllable sound frequency, you can get multiple sound effects.
+***Disadvantage: A little complicated to control.
+ 
+== Materials ==
+*'''[[mCookie-CoreUSB]]'''
+*'''[[Microduino-Buzzer]]'''
+*'''[[mCookie-Hub]]'''
+*Other hardware equipment
+**One USB cable 
+[[File:MicroduinoBuzzer-Equipment.jpg|600px|center]]
+
+== Instructions ==
+*Setup 1:Connect the Microduino Buzzer to the corresponding port(6) of the Hub with a sensor wire. 
+[[File:MicroduinoBuzzer-D6.jpg|600px|center]]
+
+*Setup 2:Stack the Hub and CoreUSB together in any order. 
+[[File:MicroduinoBuzzer-hub-coreusb.jpg|600px|center]]
+
+== Code Example 1: Simple Buzzer ==
+This first example is a simple program that produces a steady sound from the buzzer.
+
+*Setup 1:Use a USB cable to connect the CoreUSB to your PC/MAC, then open Arduino IDE. 
+[[File:CoreUSB_Ble_pc.jpg|600px|center]]
+
+* Setup 2:Copy the program code into IDE and upload to the Core module. 
+
+<source lang="cpp">
+#define buzzer_pin 6 //Define buzzer driving pin 
+#define buzzer_fre 600 //Define buzzer output frequency 
+
+void setup()
+{
+  pinMode(buzzer_pin,OUTPUT);
+}
+ 
+void loop()
+{
+    tone(buzzer_pin,buzzer_fre);    //Drive the buzzer
+}
+</source>
+
+*Select Microduino-CoreUSB as the board and COMXX as the port. 
+*Click the right arrow(—>) to upload the program. After you see "Done Uploading", it means the program has been written into the CoreUSB module. 
+*After that is done, you can hear the buzzer ring. 
+
+== Code Example 2: Buzzer Alarm ==
+This program produces a tone from the buzzer that progressively increases in frequency until it reaches a threshold and then decreases, cycling through this entire process.
+
+*Copy the program code into IDE and download to the Core board. 
+
+<source lang="cpp">
+#define buzzer_pin 6 //Define buzzer driving pin 
+
+void setup()
+{
+  pinMode(buzzer_pin,OUTPUT);
+}
+ 
+void loop()
+{
+  for(int i=200;i<=800;i++) { //Increase the frequency from 200HZ to 800HZ in a circular manner.   
+    tone(buzzer_pin,i);    //Output frequency in N0.6 port. 
+    delay(5);      //The frequency lasts for 5ms. 
+  }
+  delay(2000);     //The highest frequency lasts for 2s.
+  for(int i=800;i>=200;i--)
+  {
+    tone(buzzer_pin,i);
+    delay(10); //The frequency lasts for 10ms. 
+  }
+}
+</source>
+
+== Code Example 3: Let's Play a Song ==
+This program plays a song. The top section has an array of stored notes and delays that are used by the '''tone''' method under the '''song_play()''' function.
+By controlling the frequency and duration of a set of successive inputs to the '''tone''' method, a familiar song is played.
+
+*Copy the program code into IDE and download to the Core board. 
+<source lang="cpp">
+#define buzzer_pin 6 //Define buzzer driving pin 
+int song[] = {
+  262, 262, 294, 262, 349, 330,
+  262, 262, 294, 262, 392, 349,
+  262, 262, 523, 440, 349, 330, 294,
+  466, 466, 440, 349, 392, 349
+};
+
+int noteDurations[] = {
+  4, 4, 2, 2, 2, 1,
+  4, 4, 2, 2, 2, 1,
+  4, 4, 2, 2, 2, 2, 1,
+  4, 4, 2, 2, 2, 1
+};
+
+void setup() {
+  pinMode(buzzer_pin, OUTPUT);
+}
+
+void loop() {
+  song_play();
+}
+
+void song_play()
+{
+  for (int thisNote = 0; thisNote < 25; thisNote++)
+  {
+    int noteDuration = 1000 / noteDurations[thisNote];
+    tone(buzzer_pin, song[thisNote], noteDuration);
+    int pauseBetweenNotes = noteDuration * 1.20;
+    delay(pauseBetweenNotes);
+    noTone(buzzer_pin);
+  }
+}</source>
+
+== Explanation of Functions ==
+*'''tone(uint8_t _pin, unsigned int frequency, unsigned long duration)'''
+The '''tone''' function allows you to easily produce a sound from the buzzer. Using this function, you can set the frequency of the tone and the duration. Setting the duration parameter is not necessary (it will continue to buzz if this parameter is not set). 
+It is required to set the '''_pin''' and '''frequency''' parameters. The first parameter lets the function know what pin the buzzer is connected to so that it can produce a signal on that pin. The second parameter, '''frequency''', sets the frequency that the buzzer produces.
+
+*'''noTone(uint8_t _pin)'''
+This function stops the buzzer from playing anything. 
+
+== FAQ ==
+
+== Additional Info ==
+
+== Videos ==
+
+=== Got a Suggestion for an Edit? ===
+Email us at '''support@microduino.cc'''
