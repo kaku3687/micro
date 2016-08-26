@@ -1,0 +1,120 @@
+LightIndicator_Tutorial
+
+== Description ==
+The light indicator project takes the analog output from a light sensor, and turns on an LED to a color that corresponds to that output. The possible analog values are divided into three ranges that correspond to a different LED color, either green, blue or red.
+
+This project is a great introduction into using the data from a sensor to drive the behavior of an output device.
+
+== Materials ==
+{|class="wikitable"
+|-
+|Module||Number||Function 
+|-
+|[[Microduino-CoreUSB]]||1||Core board  
+|-
+|S[[Microduino-Sensorhub]]||1||Sensor pinboard 
+|-
+|[[Microduino-Light]]||1||light-sensitive sensor 
+|-
+|[[Microduino-Color LED]]||1||Colored led light 
+|-
+| [[Microduino-BM]]||1||Battery management
+|}
+ [[File:light_indicator-module.jpg|600px|center]]
+
+== Instructions ==
+The photoresistive sensor detects ambient light intensity. The system we build for this tutorial divides the total range over which the photoresistor can detect light into three smaller ranges, each corresponding to a particular color; either red, blue or green. As the intensity of light increases within one of these ranges, so will the corresponding intensity in the LED color of that particular range.
+
+*Setup 1：Use a USB cable to connect the CoreUSB and the PC/Mac. Then open Arduino IDE. [[File:CoreUSB_Ble_pc.jpg|600px|center]]
+
+*Setup 2：Download the program using the link, or copy and paste from the 'Code' section:
+[https://github.com/Microduino/Microduino_Tutorials/blob/master/MCookie_Tutorial/light_led/light_led.ino light_led]
+[[File: light_indicator-load.jpg|600px|center]]
+
+* Setup 3： Upload the code, choose the right board and COM port for program download after compiling. 
+
+== Code ==
+<source lang="cpp">
+#include <Adafruit_NeoPixel.h>
+
+#define PIN 6
+Adafruit_NeoPixel strip = Adafruit_NeoPixel(1, PIN, NEO_GRB + NEO_KHZ800);
+
+#define Light_PIN A0
+
+#define Light_value1 400
+#define Light_value2 800
+
+int sensorValue;
+
+void setup() {
+  Serial.begin(115200);
+  strip.begin();
+  strip.show(); // Initialize all pixels to 'off'
+}
+
+void loop() {
+  sensorValue = analogRead(Light_PIN);
+  Serial.println(sensorValue);
+  if (sensorValue < Light_value1)
+    colorWipe(strip.Color(0, map(sensorValue, 10, 400, 0, 255), 0));
+  else if (sensorValue >= Light_value1 && sensorValue < Light_value2)
+    colorWipe(strip.Color(0, 0, map(sensorValue, 400, 800, 0, 255)));
+  else if (Light_value2 >= 800)
+    colorWipe(strip.Color(map(sensorValue, 800, 960, 0, 255), 0, 0));
+}
+
+void colorWipe(uint32_t c) {
+  for (uint16_t i = 0; i < strip.numPixels(); i++) {
+    strip.setPixelColor(i, c);
+    strip.show();
+  }
+}
+</source>
+
+== Explanation of Functions ==
+*HEADERS
+The program uses a 'header' file in order to allow communication between a Core Module and the device.
+**#include <Adafruit_NeoPixel.h>
+Remember, '#include' tells the program, used by the Core module, that the library, or 'header', that follows is needed to run everything correctly. 
+The Adafruit_NeoPixel library gives access to functions for controlling the RGB LED. You won't need to worry about the details of using this library, just know that the header file (<Adafruit_NeoPixel.h>) needs to be included.
+
+In order to use the functions associated with this library, you will first need to create an Object. An Object gives you access to all of the functions and data associated with the library that it comes from. You will need to declare a unique instance of this Object in order to start using it as in the example:
+'''Adafruit_NeoPixel strip'''
+You can name the object whatever you like, so instead of irsend, you can call it:
+'''Adafruit_NeoPixel leds'''
+Once you have your object, you can access the function you need by using a dot (.) between the object and the function:
+'''strip.show();'''
+
+*Functions
+**'''begin()'''
+This function starts up the LED so that you can send it commands to change color:
+'''strip.begin();'''
+
+**'''setPixelColor()'''
+This function will set the RGB value that the LED will output. Remember, an RGB LED is a combination of a Red, Green and Blue (see? RGB) LEDs. This function takes in four inputs. The first 
+
+**'''show()'''
+This function updates the color value that displays on the LED. When you use the function to set the color on the LED, you will need to follow it with this function in order for the LED to actually output that color:
+'''strip.show();'''
+
+**'''enableIRIn()'''
+This function tells the sensor to start looking for IR signals to receive.
+
+**'''decode()'''
+This function takes the raw signal output from the receiver, and translates it into useful information. 
+This function takes an input of the type 'decode_results' declared at the top of this program. This type is a special object that can store all of the different peices of information decoded from the receiver, including, the number of bits transmitted, the length of the message and the value sent.
+You can return different values from the 'results' by using a dot (.) between the object and the value you want:
+'''results.value'''
+
+**'''resume()'''
+This function is used after a peice of data has been received from the sensor and you wish the sensor to continue to look for another signal.
+
+== FAQ ==
+
+== Additional Info ==
+
+== Videos ==
+
+=== Got a Suggestion for an Edit? ===
+Email us at '''support@microduino.cc'''
