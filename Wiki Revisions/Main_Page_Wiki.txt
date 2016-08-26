@@ -1,0 +1,52 @@
+{{Language|Main Page}}
+{| class="titlebox" width="800px" style="border:2px solid #000000; -moz-border-radius:5px 5px 5px 5px; -webkit-border-radius:5px 5px 5px 5px;" cellspacing=0 cellpadding=0
+! style="background:#000000; border-radius:2px; padding:5px; color:#ffffff;" | <div style="font-size:180%;text-align:center;">Welcome to the Microduino Wiki</div>
+|-
+|
+{| 
+|-
+|[[file:wiki.jpg|800px|center]]
+|}
+|-
+|
+{| 
+|-
+|     With small size and great power, the Microduino and mCookie series bring stackable electronic hardware to makers, designers, engineers, students and curious tinkerers of all ages. Build open-source projects or create innovative new ones. The only thing stopping you is your imagination. 
+All Microduino and mCookie modules are Arduino sketch-compatible. This means experienced makers can write their own programs in the Arduino IDE and upload their code to the hardware via USB, while beginners can take advantage of graphical Drag and Drop programming to get comfortable with coding.
+<br>
+
+The Microduino and mCookine series also dramatically decreases the size and cost of design prototyping, helps improve flexibility of Arduino-compatible boards, and enhances the Maker experience for any age or skill level. 
+<br>
+
+Microduino and mCookie modules, sensors, and accessories are perfect for those looking to turn their ideas into reality. Create your own solutions with Microduino and mCookie. 
+<br>
+
+Microduino and mCookie modules, sensors and accessories are perfect for idea realization, prototype development, low-volume production and old-fashioned fun.
+<br>
+
+|}
+|}
+
+<br>
+
+{| style="width: 900px;"| colspan="3" |
+|-
+| style="width:400px" align="left"|
+=='''[[Microduino Series]]'''==
+<br>
+ [[file:Microduino-CoreList-rect.jpg|300px|left]]
+
+| style="width:400px" align="left"| 
+=='''[[mCookie Series]]'''==
+<br>
+[[file:mCookie-rect.jpg|300px|left]]
+
+| style="width:400px" align="left"| 
+=='''[[mCookie Sensor Series]]'''==
+<br>
+[[file:Microduino-sensors.jpg|300px|left]]
+
+<br>
+
+|-
+|}

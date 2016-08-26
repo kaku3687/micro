@@ -1,0 +1,66 @@
+{{Language|MCookie ????}}
+
+{| style="width: 800px;" | colspan="2" |
+
+=mCookie UPin27 Series=
+'''([[Microduino Upin27 Pinout Summary]])'''
+|-
+| style="width:250px" | [[file:mCookie-CoreList-rect.jpg|200px|left]]
+|
+==Core Modules==
+*'''[[mCookie Core Modules]]'''
+
+
+
+*Core(ATmega328p)
+*Core+(ATmega644pa)
+*Core+(ATmega1284pa)
+*CoreUSB(ATmega32u4)
+*CoreRF(ATmega128rfa1)
+
+
+|-
+|
+[[file:mCookie-Extension-rect.jpg|200px|left]]
+|
+
+==Function Modules==
+*'''[[mCookie Function Modules]]'''
+
+
+
+*Audio, AudioPro, Amplifier, RTC, SD
+*Motion, GPS, BM, BM Shield
+
+
+|-
+|
+[[file:mCookie-App-Boards-rect.jpg|200px|left]]
+|
+
+==Communication Modules==
+*'''[[mCookie Communication Modules]]'''
+
+
+
+*Ethernet, 485, USBHOST
+*Zigbee, BLE, WIFI, GPRS, NFC
+
+|-
+|
+[[file:mCookie-en-Boards-rect.jpg|200px|left]]
+|
+
+==Extension Boards==
+*'''[[mCookie Extension Boards]]'''
+
+
+
+
+*OLED, LED Matrix, Motor, Hub, Base
+*BM Shield , Duo-V, LEGOShield
+
+
+|-
+|
+|}

@@ -1,0 +1,59 @@
+{| style="width: 800px;"
+| colspan="2" |
+
+|-
+|
+'''[[mCookie-CoreUSB]]'''
+
+*Core board of mCookie series
+*Compatible with Microduino-CoreUSB
+*Contain Microcontroller and USB
+|
+[[File:mCookie-core32U4-rect.jpg|200px|right]]
+|-
+|
+|-
+|
+'''[[mCookie-Core]]'''
+*Core board of mCookie series
+*Compatible with Arduino Uno Microduino-Core
+*Main chip:ATmega328P
+*UPin-27 standard interface
+|[[File:mCookie-core-rect.jpg|200px|right]]
+|-
+|
+'''[[mCookie-Core+]]''' (properties-enhenced)Core board
+*Compatible with Micorduino-Core+
+*Equiped with two sets of hard serial ports, and added 10 digital interfaces.
+*Main chip:ATmega644PA/ATmega1284P
+*UPin-27 standard interface
+|[[File:mCookie-core+-rect.jpg|200px|right]]
+|-
+|
+'''[[mCookie-CoreRF]]'''
+*mCookie core module
+*Support any wireless modules based on 802.15.4 agreement
+*UPin-27 standard interface
+|
+[[File:mCookie-CoreRF.JPG|200px|right]]
+|-
+|
+'''[[mCookie-USBTTL]]'''
+*mCookie serial communication module(program downloading module)
+*Stacked with mCookie-Core/Core+/CoreRF module, and download progrem from the computer
+*Downloading chip:FT232RL
+*UPin-27 standard interface
+|
+[[File:mCookie--FT232-rect.jpg|200px|right]]
+|-
+|
+'''[[mCookie-USBttlC]]'''
+*mCookie serial communication module(program downloading module)
+*Stacked with mCookie-Core/Core+/CoreRF module, and download programs from the computer
+*Downloading chip:CH340G
+*UPin-27 standard interface
+|
+[[File:mCookie--CH340-rect.jpg|200px|right]]
+|-
+|
+|}

@@ -1,0 +1,25 @@
+Microduino_Series_Home
+
+{| style="width: 1200px;" | colspan="1" |
+|-
+| style="width: 600px;" align="center"|
+== '''Learn About the Ecosystem!! (Start Here)''' ==
+<br>
+|-
+|}
+<br><br>
+
+{| style="width: 1200px;" | colspan="2" |
+|-
+| style="width:600px" align="left"| 
+=='''[[Microduino Series]]'''==
+<br>
+[[file:Microduino-CoreList-rect.jpg|250px|left]]
+
+| style="width:600px" align="right"|
+== '''[[Microduino Tutorials and Projects]]'''==
+<br>
+[[file:Microduino-Projects.png|500px|right]]
+|-
+|}
+<br><br>
